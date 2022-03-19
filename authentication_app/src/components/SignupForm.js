@@ -70,6 +70,7 @@ const SignupForm = () => {
                 .then(data => {
                     setIsLoading(false);
                     console.log(data);
+                    alert("Signup Successful, kindly login");
                     History.replace("/login");
                 }) 
                 .catch(err => {
