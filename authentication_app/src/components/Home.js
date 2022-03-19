@@ -1,10 +1,10 @@
 import NavBar from "../UI/NavBar";
 import classes from "./Home.module.css";
 
-const Home = () => {
+const Home = (props) => {
     return(
         <div className={classes.home}>
-            <NavBar />
+            <NavBar setToken = {props.setToken}/>
             <h1 className={classes.msg}>Welcome To App</h1>
         </div>
     );

@@ -1,11 +1,12 @@
 import classes from "./NavBar.module.css";
 import { useHistory } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = (props) => {
     // const auth = useContext(AuthContext);
     const History = useHistory();
     const logout = () => {
         localStorage.removeItem("token");
+        props.setToken(null);
         History.replace("/login")
     }
 
