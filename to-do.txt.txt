@@ -1,6 +1,0 @@
--creating component structure
--form validation
--creating node backend and congifuring it
--configuring mongodb
--connecting to mongodb
--adding the api logic
