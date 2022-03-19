@@ -1,0 +1,12 @@
+import classes from "./Card.module.css";
+
+const Card = (props) => {
+
+    return(
+        <div className={props.class === "profile" ? classes.profile : classes.form}>
+            {props.children}
+        </div>
+    );
+}
+
+export default Card;
