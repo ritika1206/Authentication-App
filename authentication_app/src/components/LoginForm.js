@@ -57,8 +57,9 @@ const LoginForm = (props) => {
             setIsLoading(true);
             axios.post('http://localhost:5000/api/user/login', data)
                 .then(data => {
-                    // console.log(data);
+                    console.log(data);
                     setIsLoading(false);
+                    localStorage.setItem("token", data.data.token);
                     History.replace("/home");
                 })
                 .catch(err => {

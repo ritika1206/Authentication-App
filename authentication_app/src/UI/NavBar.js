@@ -1,9 +1,13 @@
 import classes from "./NavBar.module.css";
-import { AuthContext } from '../context/auth-context';
-import { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 const NavBar = () => {
-    const auth = useContext(AuthContext);
+    // const auth = useContext(AuthContext);
+    const History = useHistory();
+    const logout = () => {
+        localStorage.removeItem("token");
+        History.replace("/login")
+    }
 
     return (
         <nav className={classes.navBar}>
@@ -11,7 +15,7 @@ const NavBar = () => {
                 <h3 className={classes.title}>Auth-App</h3>
             </li>
             <li>
-                <button type="button" className={classes.logoutBtn} onClick={auth.logout}>Logout</button>
+                <button type="button" className={classes.logoutBtn} onClick={logout}>Logout</button>
             </li>
         </nav>
     );
