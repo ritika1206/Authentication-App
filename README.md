@@ -16,7 +16,7 @@ The app is built using MERN stack.
 To run backend server, use following commands in root folder of project
 ```
   cd api/
-  node app.js
+  npm start
 ```
 
 To run frontend react server, use following in root folder of project
