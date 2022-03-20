@@ -88,7 +88,10 @@ const LoginForm = (props) => {
                     {PassHasErr && <p className={classes.errMsg}>Password should have atleast 7 characters</p>}
                     <button type="submit">Login</button>
                 </form>
-                <Link to="/signup" className={classes.link}>Signup if not registered</Link>
+                <div className={classes.linkTo}>
+                    <Link to="/signup" className={classes.link}>Signup if not registered</Link>
+                </div>
+                {/* <Link to="/signup" className={classes.link}>Signup if not registered</Link> */}
             </Card>
         </>
     );

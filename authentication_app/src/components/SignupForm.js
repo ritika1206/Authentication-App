@@ -114,7 +114,9 @@ const SignupForm = () => {
 
                     <button type="submit">Sign Up</button>
                 </form>
-                <Link to="/login" className={classes.signupLink}>Login with an existing account</Link>
+                <div className={classes.linkTo}>
+                    <Link to="/login" className={classes.link}>Login with an existing account</Link>
+                </div>
             </Card>
         </>
     );
