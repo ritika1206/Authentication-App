@@ -47,24 +47,6 @@ function App() {
     )
   }
 
-  // routes = (
-  //     <>
-  //       <Route path="/" exact>
-  //          <Redirect to="/login" />
-  //        </Route>
-  //        <Route path="/login">
-  //          <LoginForm />
-  //        </Route>
-  //        <Route path="/signup">
-  //          <SignupForm />
-  //        </Route>
-  //        <Route path="/home">
-  //          <Home />
-  //        </Route>
-
-  //     </>
-  // );
-
   return (
     <AuthContext.Provider
     value={{

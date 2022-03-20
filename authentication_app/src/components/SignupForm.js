@@ -3,10 +3,7 @@ import classes from "./Form.module.css";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import useInput from "../hooks/use-input";
-import { useHttpClient } from "../hooks/http";
-import { useContext, useState } from "react";
-import { AuthContext } from "../context/auth-context";
-import ErrorModal from "../UI/ErrorModal";
+import { useState } from "react";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
 import axios from 'axios';
@@ -15,14 +12,12 @@ const SignupForm = () => {
     const History = useHistory();
     const [isLoading, setIsLoading] = useState(false);
     // const { isLoading, error, sendRequest, clearError } = useHttpClient();
-    const auth = useContext(AuthContext);
 
     const {
         val: enteredEmail,
         hasErr: EmailHasErr,
         valChangeHandler: EmailChangeHandler,
         blurHandler: EmailBlurHandler,
-        reset: resetEmail,
         valIsValid: EmailIsValid
     } = useInput(val => val.includes("@"));
 
@@ -31,7 +26,6 @@ const SignupForm = () => {
         hasErr: UnameHasErr,
         valChangeHandler: UnameChangeHandler,
         blurHandler: UnameBlurHandler,
-        reset: resetUname,
         valIsValid: UnameIsValid
     } = useInput(val => val.trim() !== "");
 
@@ -40,7 +34,6 @@ const SignupForm = () => {
         hasErr: PassHasErr,
         valChangeHandler: PassChangeHandler,
         blurHandler: PassBlurHandler,
-        reset: resetPass,
         valIsValid: PassIsValid
     } = useInput(val => val.trim().length >= 7);
 
@@ -61,9 +54,6 @@ const SignupForm = () => {
             };
 
             const data = userInfo
-            // const data = JSON.stringify(userInfo);
-            // console.log(data)
-
             
             setIsLoading(true); 
             axios.post('http://localhost:5000/api/user/signup', data)
@@ -75,23 +65,8 @@ const SignupForm = () => {
                 }) 
                 .catch(err => {
                     setIsLoading(false);
-                    // console.log(err)
                     alert(err.response.data.message);
-                })
-
-                // const responseData = await sendRequest(
-                //   'http://localhost:5000/api/user/signup',
-                //   'POST',
-                //    data
-                // );
-        
-                // auth.login(responseData.userId, responseData.token);
-              
-        // resetPass();
-        // resetEmail();
-        // resetUname();
-
-        
+                })   
 
     }
     
@@ -101,7 +76,6 @@ const SignupForm = () => {
 
     return(
         <>
-            {/* <ErrorModal error={error} onClear={clearError} /> */}
             {isLoading && <LoadingSpinner asOverlay />}
             <Card>
                 <form className={classes.loginForm} onSubmit={submitHandler}>

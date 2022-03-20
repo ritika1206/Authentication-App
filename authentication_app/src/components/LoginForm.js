@@ -3,10 +3,7 @@ import Card from "../UI/Card";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import useInput from "../hooks/use-input";
-import { useHttpClient } from "../hooks/http";
-import { useContext, useState } from "react";
-import { AuthContext } from "../context/auth-context";
-import ErrorModal from "../UI/ErrorModal";
+import { useState } from "react";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
 import axios from 'axios';
@@ -14,16 +11,12 @@ import axios from 'axios';
 const LoginForm = (props) => {
     const History = useHistory();
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
-    // const { isLoading, error, sendRequest, clearError } = useHttpClient();
-    const auth = useContext(AuthContext);
 
     const {
         val: enteredEmail,
         hasErr: EmailHasErr,
         valChangeHandler: EmailChangeHandler,
         blurHandler: EmailBlurHandler,
-        reset: resetEmail,
         valIsValid: EmailIsValid
     } = useInput(val => val.includes("@"));
 
@@ -32,13 +25,8 @@ const LoginForm = (props) => {
         hasErr: PassHasErr,
         valChangeHandler: PassChangeHandler,
         blurHandler: PassBlurHandler,
-        reset: resetPass,
         valIsValid: PassIsValid
     } = useInput(val => val.trim().length >= 7);
-    
-    const clearError = () => {
-        setError(null);
-    }
 
     const submitHandler = async (event) => {
         event.preventDefault();
@@ -54,12 +42,9 @@ const LoginForm = (props) => {
                 password: enteredPass
             }
 
-            // console.log(props.setToken)
-
             setIsLoading(true);
             axios.post('http://localhost:5000/api/user/login', data)
                 .then(data => {
-                    // console.log(data);
                     setIsLoading(false);
                     localStorage.setItem("token", data.data.token);
                     props.setToken(data.data.token);
@@ -68,30 +53,8 @@ const LoginForm = (props) => {
                 .catch(err => {
                     setIsLoading(false);
                     console.log(err.response.data.message);
-                    // error = err.response;
-                    // setError(err.response.data.message);
                     alert(err.response.data.message)
                 })
-
-            // const responseData = await sendRequest(
-            //   'http://localhost:5000/api/user/login',
-            //   'POST',
-            //   JSON.stringify({
-            //     email: enteredEmail,
-            //     password: enteredPass
-            //   }),
-            //   {
-            //     'Content-Type': 'application/json'
-            //   }
-            // );
-            
-
-
-            // auth.login(responseData.userId, responseData.token);
-        //   } catch (err) {}
-
-        // resetPass();
-        // resetEmail();
     }
 
     const mailErrCls = EmailHasErr? classes.inErr : ""
@@ -100,7 +63,6 @@ const LoginForm = (props) => {
 
     return(
         <>
-            <ErrorModal error={error} onClear={clearError} />
             {isLoading && <LoadingSpinner asOverlay />}
             <Card>
                 <form className={classes.loginForm} onSubmit={submitHandler}>
