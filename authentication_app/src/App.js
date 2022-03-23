@@ -9,22 +9,25 @@ import { useState } from "react";
 function App() {
   const { token, login, logout, userId } = useAuth();
 
-  const [ authToken, setAuthToken ] = useState(null);
+  const [ authToken, setAuthToken ] = useState(localStorage.getItem("token"));
 
   const authTokenHandler = (token) => {
     setAuthToken(token);
   }
-
 
   let routes;
 
   if(authToken) {
     routes = (
       <>
-        <Route path="/home">
-          <Home setToken = {authTokenHandler} />
-        </Route>
-        
+        <Switch>
+          <Route path="/home">
+            <Home setToken = {authTokenHandler} />
+          </Route>
+          <Route>
+            <Redirect to="/home" />
+          </Route>
+        </Switch>
       </>
     )
   }

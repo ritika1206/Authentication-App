@@ -36,7 +36,6 @@ const LoginForm = (props) => {
         if(!EmailIsValid || !PassIsValid)
             return;
         
-        // try {
             const data = {
                 email: enteredEmail,
                 password: enteredPass
@@ -48,7 +47,8 @@ const LoginForm = (props) => {
                     setIsLoading(false);
                     localStorage.setItem("token", data.data.token);
                     props.setToken(data.data.token);
-                    History.replace("/home");
+                    // History.replace("/home");
+                    History.push("home");
                 })
                 .catch(err => {
                     setIsLoading(false);
@@ -91,7 +91,6 @@ const LoginForm = (props) => {
                 <div className={classes.linkTo}>
                     <Link to="/signup" className={classes.link}>Signup if not registered</Link>
                 </div>
-                {/* <Link to="/signup" className={classes.link}>Signup if not registered</Link> */}
             </Card>
         </>
     );
